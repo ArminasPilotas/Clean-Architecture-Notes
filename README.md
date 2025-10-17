@@ -198,6 +198,10 @@ This avoids depending on code you don’t need.
 
 **Chapter 14. Component Coupling**
 
-(Notes to be added…)
+**The Acyclic Dependencies Principle** It mentions about elemeninating dependency cycles by working on releasable components and when component is working and ready to deploy, it should be released for use by the other developers. Acyclic dependencies principle requires the dependency graph of components in a system to have no cycles adhering to this principle makes systems more stable, independently deployable, and easier to understand and maintain.
+
+**Top-Down Design** Component structure cannot be designed from the top down, when system evolves and system grows or changes it will be hardly maintainable.
+
+**The Stable Dependencies Principle** A component should be as abstract as it is stable. Software components should be designed so that dependencies point from volatile (less stable) components to stable (more stable) ones. This ensures that a change in a volatile component does not force a change in a stable component, which is often depended upon by many other parts of the system.
 
 ---
