@@ -205,3 +205,79 @@ This avoids depending on code you don’t need.
 **The Stable Dependencies Principle** A component should be as abstract as it is stable. Software components should be designed so that dependencies point from volatile (less stable) components to stable (more stable) ones. This ensures that a change in a volatile component does not force a change in a stable component, which is often depended upon by many other parts of the system.
 
 ---
+
+**PART 5. Architecture**
+
+**Chapter 15. What Is Architecture?**
+
+The primary purpose of architecture is to support the life cycle of the system. Good architecture makes the system easy to understand, easy to develop, easy to maintain, and easy to deploy. The ultimate goal is to minimize the lifetime cost of the system and to maximize programmer productivity.
+
+Architecture from the code side constructs from these points: Development, Deployment, Operation, Maintenance.
+
+A software system that is hard to develop is not likely to have a long and healthy lifetime. So the architecture of a system should make that system easy to develop, for the team(s) who develop it.
+
+To be effective, a software system must be deployable. The higher the cost of deployment, the less useful the system is. A goal of a software architecture, then, should be to make a system that can be easily deployed with a single action.
+
+The impact of architecture on system operation tends to be less dramatic than impact of architecture on development, deployment, and maintenance. Almost any operational difficulty can be resolved by throwing more hardware at the system without drastically impacting the software architecture. But it doesn't mean that it's correct way to solve issue and problem probably lies in architecture decisions.
+
+In early stages of development it is not necessary to choose database, web server, adopt REST or instantly use dependency injection frameworks. In early stages of development it's worth to keep any options open for future development.
+
+---
+
+**Chapter 16. Independence**
+
+Good architecture must support: Use cases and operation of the system; The maintenance of the system; The development of the system; The deployment of the system.
+
+Use Cases - Means that the architecture of the system must support the intent of the system.
+
+Operation - System operation should support agreed throughput and response times for each use case that demands it.
+
+Development - A system that must be developed by an organization with many teams and many concerns must have an architecture that facilitates independent actions by those teams, so that the teams do not interfere with each other during development.
+
+Deployment - The architecture also plays a huge role in determining the ease with which the system is deployed. The goal is immediate deployment. A good architecture does not rely on dozens of little configuration scripts and property file tweaks.
+
+Decoupling in architecture is a design strategy that minimizes the dependencies between components, allowing them to operate and evolve independently. It's also applicable for development teams, component deployments.
+
+---
+
+**Chapter 17. Boundaries: Drawing Lines**
+
+Software architecture is the art of drawing lines - boundaries. Those boundaries separate software elements from one another, and restrict those on one side from knowing about those on the other.
+
+You draw lines between things that matter and things that do not. For example UI doesn't matter to the database or database doesn't matter to the business rules.
+
+Developers and customers often get confused about what the system is. They see the UI, and think that the UI is the system. Good example for this would be video game for customers experience matters the most like sounds, UI, mouse, keyboard but behind that interface there is a model like data structures, functions.
+
+The plugin architecture was developed to create a collaborative software environment where an application can be created from the collection of different, reusable components that don't rely on one another but can still be assembled dynamically using these components.
+
+---
+
+**Chapter 18. Boundary Anatomy**
+
+The architecture of a system is defined by a set of software components and the boundaries that separate them. Those boundaries come in many different forms.
+
+Boundary crossing - Act of one component interacting with another, often by calling a function and passing data across a defined separation in the system. To create appropriate boundary crossing is to manage the source code dependencies.
+
+The Dreaderd Monolith - It is simply a disciplined segregation of functions and data within a single processor and a single address space.
+
+Deployment Components - Define the physical or logical separation between components that are deployed independently, such as DLLs or JAR files.
+
+Threads - Both monoliths and deployment components can make use of threads. Threads are not architectural boundaries or units of deployment, but rather a way to organize the schedule and order of execution.
+
+Local Processes - typically created from the command line or an equivalent system call. Local processes run in the same processor, or in the same set of processors within a multicore, but run in separate address spaces.
+
+Services - The strongest boundary is a service. A service is a process, generally started from the command line or through an equivalent system call. Services do not depend on their physical location. Two communicating services may, or may not, operate in the same physical processor or multicore.
+
+Boundaries in a system will often be a mixture (if it's not monolith) of local chatty boundaries and boundaries that are more concerned with latency.
+
+---
+
+**Chapter 19. Policy And Level**
+
+Software systems are statements of policy. Indeed, at its core, that is all a computer program actually is. A computer program is a detailed description of the policy by which inputs are transformed into outputs.
+
+Policy can be broken into many different smaller statements. Some of those statements will describe how particular business rules are to be calculated. Others will describe how certain reports are to be formatted. Still others will describe how input data are to be validated.
+
+Level - the distance from the inputs and outputs. The farther a policy is from both input and output, the higher its level and vice versa the closer policy to input and output the lower level policy it is.
+
+---
