@@ -281,3 +281,50 @@ Policy can be broken into many different smaller statements. Some of those state
 Level - the distance from the inputs and outputs. The farther a policy is from both input and output, the higher its level and vice versa the closer policy to input and output the lower level policy it is.
 
 ---
+
+**Chapter 20. Business Rules**
+
+Business rules - rules or procedures that make or save the business money, irrespective of whether they were implemeneted on a computer or they were executed manually.
+
+Critical business rules example - bank changes X% interest for a loan it's critical business rule, if that rule doesn't exist in bank, it wouldn't probably exist.
+
+Entities - object within our computer systen that embodies a small set of critical business rules operating on critical business data.
+
+The business rules should remain pristine, unsullied by baser concerns such as the user interface or database used. Ideally, the code that represents the business rules should be the heart of the system
+
+---
+
+**Chapter 21. Screaming Architecture**
+
+Screaming architecture - he idea is that the architecture of your system should immediately reveal its purpose. Just like looking at the blueprint of a building, you can tell whether it's a house, library, hospital. It should scream the domain / business intent / use-cases, rather than screaming which framework or database is used.
+
+Good architectures are centered on use cases so that architects can safely describe the structures that support those use cases without committing to frameworks, tools, and environments.
+
+If your system architecture is all about the use cases, and if you have kept your frameworks at arm’s length, then you should be able to unit-test all those use cases without any of the frameworks in place.
+
+---
+
+**Chapter 22. Clean Architecture**
+
+Each architectures produces systems that have the following characteristics :
+1. Independent of frameworks
+2. Testable
+3. Independent of the UI
+4. Independent of the database
+5. Independent of any external agency
+
+In clean architecture source code dependencies must point only inward, toward higher-level policies.
+
+The clean architecture circle layers from highest to lowest:
+
+Entities - Entities encapsulate enterprise-wide Critical Business Rules. An entity can be an object with methods, or it can be a set of data structures and functions.
+
+Use cases - The software in the use cases layer contains application-specific business rules. It encapsulates and implements all of the use cases of the system.
+
+Interface adapters - set of adapters that convert data from the format most convenient for the use cases and entities, to the format most convenient for some external agency such as the database or the web.
+
+Frameworks and drivers - generally composed of frameworks and tools such as the database and the web framework.
+
+If you follow dependency rule it will save you a lot of headache going forward, when any of the external parts of the system become obsolete, such as database, or the web framework, you can replace those elements with a minimum effort.
+
+---
