@@ -328,3 +328,57 @@ Frameworks and drivers - generally composed of frameworks and tools such as the 
 If you follow dependency rule it will save you a lot of headache going forward, when any of the external parts of the system become obsolete, such as database, or the web framework, you can replace those elements with a minimum effort.
 
 ---
+
+**Chapter 23. Presenters And Humble Objects**
+
+Presenters are a form of the Humble Object pattern, which helps to identify and protect architectual boundaries. Presenter is the testable object, its job is to accept data from the application and format it for presentation so that the View can simply move it to the screen.
+
+Hunble Object pattern - design pattern that was originally identified as a way to help unit tests to separate behaviors that are hard to test from behaviors that are easy to test. The use of this pattern at architectural boundaries vastly increases the testability of the entire system.
+
+View is the hunble object that is hard to test, it's passive user interface component that displays data and routes user actions to the presenter.
+
+---
+
+**Chapter 24. Partial Boundaries**
+
+Partial boundaries reduce the cost of full architectual separation while keeping the option for future independence.
+
+Components are designed as if independent, with interfaces and structures, but compiled and deployed together, it keeps flexibility, avoids versioning and release management.
+
+One dimensional boundaries suggest to use dependency inversion (strategy pattern) to separate client and implementation it allows partial independence but can decay if direct dependencies appear.
+
+Facade classes act as controlled gateways. They expose only necessary methods and hide internal services, keeping encapsulation within one deployable unit.
+
+---
+
+**Chapter 25. Layers And Boundaries**
+
+Systems are often seen as having three parts: UI, business rules, and database. For small systems, this works, but larger systems need more layers and boundaries.
+
+Architectural boundaries exist everywhere, but they are expensive. Ignoring them early makes them harder to add later. The architect must balance between YAGNI and anticipating real needs. The goal is to add boundaries only when necessary right when the cost of not having them becomes higher than the cost of implementing them.
+
+---
+
+**Chapter 26. The Main Component**
+
+In every system, there is at least one component that creates, coordinates, and oversees the others it's like Main method in programming languages and it's lowest-level policy.
+
+Main is like a plugin that sets up the initial conditions and configurations, gathers all the outside resources, and then hands control over to the high-level policy of the application. Since it is a plugin, it is possible to have many Main components, one for each configuration of your application.
+
+---
+
+**Chapter 27. Services: Great And Small**
+
+Service-oriented and micro-service architectures have become very popular of late because services seem to be strongly decoupled from each other and services appear to support independence of development and deployment.
+
+2 common fallacies about services:
+The decoupling fallacy - just because logic is split into separate services/processes doesn't mean they are really decoupled. They often share data or interfaces which create hidden coupling.
+The fallacy of independant development and deployment - it's assumed that teams can develop/deploy services independently. In reality, changes to shared data or behavior may force coordination across services.
+
+To reduce problems of services coupling, each service should itself have internal structure: components, abstractions and services should be grouped by related behavior between services.
+
+Component-based services - service should be internally cohesive, organised with clear boundaries inside it, not just at service level.
+
+All in all services are useful for scaling and organizing work, but the real architecture is about the boundaries and dependencies we draw, and you shouldn't assume you get decoupling or independent by just splitting the services.
+
+---
