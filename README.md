@@ -382,3 +382,88 @@ Component-based services - service should be internally cohesive, organised with
 All in all services are useful for scaling and organizing work, but the real architecture is about the boundaries and dependencies we draw, and you shouldn't assume you get decoupling or independent by just splitting the services.
 
 ---
+
+**Chapter 28. The Test Boundary**
+
+Tests are the most isolated system component. They are not necessary for system operation. No user depends on them. Their role is to support development, not operation.
+
+Tests that are strongly coupled to the system must change along with the system. Even the most trivial change to a system component can cause many coupled tests to break or require changes. 
+
+First rule of software design - don't depend on volatile things. For example writting tests to test UI login functionality, when login page is updated, those tests will fail. The way to accomplish this goal is to create a specific API that the tests can use to verify all the business rules.
+
+Tests are not outside the system; rather, they are parts of the system that must be well designed if they are to provide the desired benefits of stability and regression. Tests that are not designed as part of the system tend to be fragile and difficult to maintain.
+
+---
+
+**Chapter 29. Clean Embedded Architecture**
+
+Although software does not wear out, it can be destroyed from within by unmanaged dependencies on firmware and hardware. It is not uncommon for embedded software to be denied a potentially long life due to being infected with dependencies on hardware.
+
+Definitions of firmware:
+- Firmware is held in non-volatile memory devices such as ROM, EPROM, or flash memory.
+- Firmware is a software program or set of instructions programmed on a hardware device.
+- Firmware is software that is embedded in a piece of hardware.
+
+Key idea is to apply the principles of clean architecture to embedded, firmware systems, to reduce hardware-dependence, increase testability, and make conde more maintainable/changeable when hardware/firmware evolves.
+
+Embedded architecture layers:
+1. Hardware (lowest level) - The real physical device: chipcs, registers, IO ports.
+2. Firmware (hardware abstraction layer) - provides services such as reading/writting persistent storage, controlling I/O, etc.
+3. Application logic - domain-like logic calculations, sensor data interpretation, use-case behavior etc..
+
+---
+
+**PART 6. Details**
+
+**Chapter 30. The Database Is A Detail**
+
+The database is not part of your system's architecture - its a detail. Business rules and use cases define your architecture, not the choice of database engine, a database is just a mechansim for data storage and retrieval.
+
+Data is not equal database - data model (business entities, relationships) is part of the core and database system SQL, NoSQL, file, cloud store is a replaceable implementaion detail.
+
+Principles to follow:
+- You should be able to swap the database, with minimal changes to the core code.
+- Test business logic without the real database.
+- Avoid leaking SQL or ORM entities into business code.
+- Performance tuning, caching, and schema optimization live in infrastructure, not in use cases.
+
+---
+
+**Chapter 31. The Web Is A Detail**
+
+HTTP/Web UI us just another kind of I/O device, it should not drive your core business rules or use-case logic and it's not part of the architectures's heart. Business logic and use cases must remain independent of web-specific code or frameworks.
+
+Principles to follow:
+- Treat the Web UI like any other interface for example desktop UI, mobile app like a changeable layer.
+- Use the dependency rule: higher-level use-case, business rule code should not depend on web frameworks.
+- Encapsulate web-side concerns behind interfaces/adapters so that the core logic does not need to know about HTTP, REST, JSON or web controllers.
+
+Author implies that as UI technologies change desktop -> web -> mobile -> whetever next, architects must avoid letting such shifts force re-design of core logic.
+
+---
+
+**Chapter 32. The Web Is A Detail**
+
+Frameworks are tools, not architecture. They serve application, but they shouldn't define it. Tightly coupling your business logic to a framework is risky if the framework changes or becomes obsolete, big changes is gonna be needed to migrate to new framework, so they should be treated in the outer layers.
+
+Some insights:
+- Framework authors aren't designing for your domain or needs, since they don't know your problem space, their decisions may conflict with your long term architecture goals.
+- When you adopt a framework, you commit to it, but one-sided dependency means you take on all the risk of change, compatibility, upgrade path issues.
+- If you scatter framework-specific annotations for example Spring annotations for API calls throughout your domain or business logic classes, you are embedding that framework in your architecture.
+- Frameworks are replacable, they are details and logic should be designed in that way that you could replace them without rewritting business logic.
+
+---
+
+**Chapter 34. The Missing Chapter**
+
+Architecture diagrams are not enough it's how you organize code (packages, modules, visibility) determines if your architecture truly acceptable. Bad structure can destroy good design.
+
+Classic 'package by layer' scatters feature code; 'package by feature' improves cohesion by grouping logic around business functionality.
+
+Ports and adapters or component-based packaging provide stronger encapsulation and inner layers expose only needed interfaces.
+
+Use language visibility (private, internal, public) to prevent unintended dependencies.
+
+Implementation structure is part of architecture - your compiler or module system should help enforce architectural discipline.
+
+---
